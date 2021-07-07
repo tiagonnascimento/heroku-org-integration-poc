@@ -1,5 +1,5 @@
 const express = require('express');
-const { mapLeads } = require('maping/base.js');
+const { mapLeads } = require('./mapping/base.js');
 const { Pool } = require('pg');
 
 const PORT = process.env.PORT || 5000;

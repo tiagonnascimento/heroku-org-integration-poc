@@ -1,11 +1,11 @@
-import Lead from 'mapping/lead';
+const { mapLead } = require('./lead.js');
 
 let mapLeads = (result) => {
     let leads = [];
 
     if (result.rows) {
         result.rows.forEach( (row)  => {
-            leads.push(new Lead(row));
+            leads.push(mapLead(row));
         });
     }
 
