@@ -19,7 +19,7 @@ let query = async (query, params) => {
     return res    
 };
 
-let upsertLeadsOnLightning = async(leads) => {
+let upsertLeadsOnLightning = async (leads) => {
 
     const client = await pool.connect()
     try {
