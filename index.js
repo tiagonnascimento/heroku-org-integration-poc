@@ -16,7 +16,7 @@ express()
         const result = await client.query('Select * from sfclassic.lead where status = \'Em aberto\' order by createddate desc limit 1000');
         const results = { 'results': (result) ? result.rows : null };
 
-        res.send('Tamanho do batch: ' + results.size());
+        res.send('Tamanho do batch: ' + results.length);
 
         client.release();
       } catch (err) {
