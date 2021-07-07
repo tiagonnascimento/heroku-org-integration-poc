@@ -1,6 +1,6 @@
 const express = require('express');
 const { mapLeads } = require('./mapping/base.js');
-const { db } = require('./db/index.js');
+const { query } = require('./db/index.js');
 
 const PORT = process.env.PORT || 5000;
 
@@ -9,7 +9,7 @@ express()
   .get('/', (req, res) => res.send('Dispare o processo de sincronismo em /synch/Lead'))
   .get('/sync/Lead', async(req, res) => {
       try {
-        const result = await db.query('Select * from sfclassic.lead where status = \'Em aberto\' order by createddate desc limit 100');
+        const result = await query('Select * from sfclassic.lead where status = \'Em aberto\' order by createddate desc limit 100');
         
         let leads = mapLeads(result);
        
