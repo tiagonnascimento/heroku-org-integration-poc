@@ -33,7 +33,7 @@ let mapLead = (row) => {
     lead.leadsource = row.leadsource;
     lead.status = row.status;
     lead.rating = row.rating;
-    lead.recordtypeid = '';
+    lead.recordtypeid = '0125e000001CO5TAAW';
     // lead.observa_o__c = row.observa_o__c; // campo não mapeado no destino
 
         // dados do pardot

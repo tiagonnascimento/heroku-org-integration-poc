@@ -11,9 +11,10 @@ express()
       try {
         const result = await query('Select * from sfclassic.lead where status = \'Em aberto\' order by createddate desc limit 100');
         
-        upsertLeadsOnLightning(mapLeads(result));
+        let leadsMapeados = mapLeads(result);
+        upsertLeadsOnLightning(leadsMapeados);
        
-        res.send('Quantidade de leads mapeados: ' + leads.length);
+        res.send('Quantidade de leads mapeados: ' + leadsMapeados.length);
 
         } catch (err) {
             console.error(err);
