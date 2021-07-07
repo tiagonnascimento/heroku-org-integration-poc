@@ -1,7 +1,10 @@
-const express = require('express')
-const PORT = process.env.PORT || 5000
+import Lead from 'mapping/lead';
+const express = require('express');
 const { Pool } = require('pg');
-const pool = new Pool({
+
+const PORT = process.env.PORT || 5000;
+
+const pool = new Pool( {
   connectionString: process.env.DATABASE_URL,
   ssl: {
     rejectUnauthorized: false
@@ -16,7 +19,15 @@ express()
         const result = await client.query('Select * from sfclassic.lead where status = \'Em aberto\' order by createddate desc limit 1000');
         const results = { 'results': (result) ? result.rows : null };
 
-        res.send(results);
+        let leads = [];
+
+        if (result.rows) {
+            result.rows.forEach( (row)  => {
+                leads.push(new Lead(row));
+            })
+        }
+
+        res.send('Quantidade de leads mapeados: ' + leads.length);
 
         client.release();
       } catch (err) {
