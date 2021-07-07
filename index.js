@@ -10,13 +10,13 @@ const pool = new Pool({
 
 express()
   .get('/', (req, res) => res.send('Dispare o processo de sincronismo em /synch/Lead'))
-  .get('/synch/Lead', async(req, res) => {
+  .get('/sync/Lead', async(req, res) => {
     try {
         const client = await pool.connect();
         const result = await client.query('Select * from sfclassic.lead where status = \'Em aberto\' order by createddate desc limit 1000');
         const results = { 'results': (result) ? result.rows : null };
 
-        res.send('Tamanho do batch: ' + results.length);
+        res.send(results);
 
         client.release();
       } catch (err) {
