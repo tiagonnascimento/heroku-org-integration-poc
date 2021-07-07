@@ -9,12 +9,12 @@ const pool = new Pool(
     }
 );
 
-let query = async (text, params) => {
+let query = async (query, params) => {
     const start = Date.now()
     const client = await pool.connect();
-    const res = await client.query(text, params)
+    const res = await client.query(query, params)
     const duration = Date.now() - start
-    console.log('Query executada: ', { text, duration, rows: res.rowCount })
+    console.log('Query executada: ', { query, duration, rows: res.rowCount })
     client.release();
     return res    
 };
