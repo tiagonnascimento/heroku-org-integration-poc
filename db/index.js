@@ -62,8 +62,9 @@ let upsertLeadsOnLightning = async (leads) => {
             'pi__first_touch_url__c = $56, ' + 
             'pi__utm_campaign__c = $57, ' + 
             'pi__utm_source__c = $58, ' + 
-            'pi__utm_medium__c = $59, ' + 
-            'pi__score__c = $60';
+            'pi__utm_content__c = $59, ' + 
+            'pi__utm_medium__c = $60, ' + 
+            'pi__score__c = $61';
 
         await Promise.all(leads.map( async (lead) => {
             let args = [];
