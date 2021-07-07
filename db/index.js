@@ -35,7 +35,7 @@ let upsertLeadsOnLightning = async (leads) => {
             'pi__utm_campaign__c, pi__utm_source__c, pi__utm_content__c, pi__utm_medium__c, pi__score__c) ' +
             'VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, $23, $24, $25, $26, $27, $28, $29, $30, $31)';
 
-        leads.foreach((lead) => {
+        await Promise.all(leads.map( async (lead) => {
             let args = [];
             args.push(lead.external_id__c);
             args.push(lead.firstname);
@@ -69,7 +69,7 @@ let upsertLeadsOnLightning = async (leads) => {
             args.push(lead.pi__utm_medium__c);
             args.push(lead.pi__score__c);
             const res = await client.query(insertText, args)
-        });
+        }));
 
         await client.query('COMMIT')
     } catch (err) {
