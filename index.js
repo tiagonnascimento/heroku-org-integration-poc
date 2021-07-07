@@ -1,6 +1,6 @@
 const express = require('express');
 const { mapLeads } = require('./mapping/base.js');
-const { query } = require('./db/index.js');
+const { query, upsertLeadsOnLightning } = require('./db/index.js');
 
 const PORT = process.env.PORT || 5000;
 
@@ -11,7 +11,7 @@ express()
       try {
         const result = await query('Select * from sfclassic.lead where status = \'Em aberto\' order by createddate desc limit 100');
         
-        let leads = mapLeads(result);
+        upsertLeadsOnLightning(mapLeads(result));
        
         res.send('Quantidade de leads mapeados: ' + leads.length);
 
