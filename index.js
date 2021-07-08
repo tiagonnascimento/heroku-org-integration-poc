@@ -9,7 +9,7 @@ express()
   .get('/', (req, res) => res.send('Dispare o processo de sincronismo em /synch/Lead'))
   .get('/sync/Lead', async(req, res) => {
       try {
-        const result = await query('Select * from sfclassic.lead where status = \'Em aberto\' order by createddate desc limit 100');
+        const result = await query('Select * from sfclassic.lead where status = \'Em aberto\' order by createddate desc limit $1', [process.env.NUMERO_REGISTROS_SINCRONIZADOS]);
         
         let leadsMapeados = mapLeads(result);
         upsertLeadsOnLightning(leadsMapeados);
