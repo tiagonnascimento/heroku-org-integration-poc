@@ -130,6 +130,8 @@ let upsertLeadsOnLightning = async (leads) => {
             args.push(lead.pi__utm_medium__c);
             args.push(lead.pi__score__c);
             const res = await client.query(insertText, args)
+
+            console.log('DML executada: ', { insertText, res });
         }));
 
         await client.query('COMMIT')
